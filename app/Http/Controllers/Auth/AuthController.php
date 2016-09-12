@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Requests\Request;
 use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
@@ -50,8 +51,8 @@ class AuthController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|max:255',
-            'Phone' => 'required|regex:/[0-9]{3}-[0-9]{3}[0-9]{2}[0-9]{2}/',
-            'Date' => 'required|regex:/[0-9]{4}-[0-9]{2}-[0-9]{2}/',
+            'phone' => 'required|regex:/[0-9]{3}-[0-9]{7}/',
+            'date' => 'required|regex:/[0-9]{4}-[0-9]{2}-[0-9]{2}/',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
             'CaptchaCode' => 'required|valid_captcha'
@@ -64,13 +65,36 @@ class AuthController extends Controller
      * @param  array  $data
      * @return User
      */
-    protected function create(array $data)
+   public function create(array $data )
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        print_r($data);
+        if($data->hasFile('preview')) //Проверяем была ли передана картинка
+        {
+            $request=date('d.m.Y'); //опеределяем текущую дату, она же будет именем каталога для картинок
+            $root=$_SERVER['DOCUMENT_ROOT']."/images/"; // это корневая папка для загрузки картинок
+            if(!file_exists($root.$request))
+            {
+                mkdir($root.$request); // если папка с датой не существует, то создаем ее
+            }
+            $f_name=$data->file('preview')->getClientOriginalName();//определяем имя файла
+            $data->file('preview')->move($root.$request,$f_name); //перемещаем файл в папку с оригинальным именем
+            $all=$data->all(); //в переменой $all будет массив, который содержит все введенные данные в форме
+            $all['preview']="/images/".$request."/".$f_name;// меняем значение preview на нашу ссылку, иначе в базу попадет что-то вроде /tmp/sdfWEsf.tmp
+            User::create($all); //сохраняем массив в базу
+        }
+        else
+        {
+            return User::create([
+                'Soname' => $data['Soname'],
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'date' => $data['date'],
+                'phone' => $data['phone'],
+                'password' => bcrypt($data['password']),
+            ]);
+        }
+
+
     }
 
     public function index()

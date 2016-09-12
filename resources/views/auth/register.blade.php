@@ -7,17 +7,22 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Register</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}" enctype="multipart/form-data" >
                         {{ csrf_field() }}
 
 
 <!-- ///////////////////////////////////////////////////////  AVATARKA ////////////////////////////////////////////////////////  -->
 
-
-
-
-
-
+                        <div class="form-group{{ $errors->has('preview') ? ' has-error' : '' }}">
+                            <label for="name" class="col-md-4 control-label">upload photos</label>
+                                <div class="col-md-6">
+                                    <div class="controls clearfix">
+                                        <span class="btn btn-success btn-file">
+                                            <i class="icon-plus"></i> <input type="file" name="preview" id="image" />
+                                        </span>
+                                    </div>
+                                </div>
+                        </div>
 
 
 
@@ -72,11 +77,11 @@
 
                         <!--/////////////////////////////////////////////////////////////// date  ////////////////////////////////-->
 
-                        <div class="form-group{{ $errors->has('Date') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">Date of birth(гггг-мм-дд)</label>
+                        <div class="form-group{{ $errors->has('date') ? ' has-error' : '' }}">
+                            <label for="email" class="col-md-4 control-label">Date of birth(YYYY-MM-DD)</label>
 
                             <div class="col-md-6">
-                                <input id="text" type="text" class="form-control" name="Date" value="{{ old('email') }}">
+                                <input id="text" type="text" class="form-control" name="date" value="{{ old('date') }}">
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -92,7 +97,7 @@
                             <label for="Phone" class="col-md-4 control-label">Phone</label>
 
                             <div class="col-md-6">
-                                <input id="Phone" type="text" class="form-control" name="Phone" value="{{ old('email') }}">
+                                <input id="Phone" type="text" class="form-control" name="phone" value="{{ old('phone') }}">
                                 @if ($errors->has('Phone'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('Phone') }}</strong>
@@ -140,10 +145,7 @@
 
                             <div class="col-md-6">
                                 {!! captcha_image_html('ContactCaptcha') !!}
-
                                 <input class="form-control" type="text" id="CaptchaCode" name="CaptchaCode" style="margin-top:5px;">
-
-
                                 @if ($errors->has('CaptchaCode'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('CaptchaCode') }}</strong>
@@ -154,9 +156,10 @@
 <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////  -->
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                                <input type="hidden" name="_token" value="{{csrf_token()}}" />
+                                <input type="submit" class="btn btn-primary">
                                     <i class="fa fa-btn fa-user"></i> Register
-                                </button>
+                                </input>
                             </div>
                         </div>
                     </form>
