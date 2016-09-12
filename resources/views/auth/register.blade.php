@@ -10,6 +10,36 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
                         {{ csrf_field() }}
 
+
+<!-- ///////////////////////////////////////////////////////  AVATARKA ////////////////////////////////////////////////////////  -->
+
+
+
+
+
+
+
+
+
+
+
+<!--/////////////////////////////////////////////////////////////// Soname  //////////////////////////////// -->
+                        <div class="form-group{{ $errors->has('Soname') ? ' has-error' : '' }}">
+                            <label for="name" class="col-md-4 control-label">Soname</label>
+
+                            <div class="col-md-6">
+                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}">
+
+                                @if ($errors->has('Soname'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('Soname') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <!--/////////////////////////////////////////////////////////////// name  ////////////////////////////////-->
+
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Name</label>
 
@@ -23,6 +53,8 @@
                                 @endif
                             </div>
                         </div>
+
+                        <!--/////////////////////////////////////////////////////////////// email  ////////////////////////////////-->
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>
@@ -38,6 +70,39 @@
                             </div>
                         </div>
 
+                        <!--/////////////////////////////////////////////////////////////// date  ////////////////////////////////-->
+
+                        <div class="form-group{{ $errors->has('Date') ? ' has-error' : '' }}">
+                            <label for="email" class="col-md-4 control-label">Date of birth(гггг-мм-дд)</label>
+
+                            <div class="col-md-6">
+                                <input id="text" type="text" class="form-control" name="Date" value="{{ old('email') }}">
+
+                                @if ($errors->has('email'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('Date') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <!--/////////////////////////////////////////////////////////////// Phone  ////////////////////////////////-->
+
+                        <div class="form-group{{ $errors->has('Phone') ? ' has-error' : '' }}">
+                            <label for="Phone" class="col-md-4 control-label">Phone</label>
+
+                            <div class="col-md-6">
+                                <input id="Phone" type="text" class="form-control" name="Phone" value="{{ old('email') }}">
+                                @if ($errors->has('Phone'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('Phone') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <!--/////////////////////////////////////////////////////////////// Password  ////////////////////////////////-->
+
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Password</label>
 
@@ -51,6 +116,8 @@
                                 @endif
                             </div>
                         </div>
+
+                        <!--/////////////////////////////////////////////////////////////// Conf  Password  ////////////////////////////////-->
 
                         <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
                             <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
@@ -66,6 +133,25 @@
                             </div>
                         </div>
 
+                        <!--/////////////////////////////////////////////////////////////// Capcha ////////////////////////////////-->
+
+                        <div class="form-group{{ $errors->has('CaptchaCode') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Captcha</label>
+
+                            <div class="col-md-6">
+                                {!! captcha_image_html('ContactCaptcha') !!}
+
+                                <input class="form-control" type="text" id="CaptchaCode" name="CaptchaCode" style="margin-top:5px;">
+
+
+                                @if ($errors->has('CaptchaCode'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('CaptchaCode') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+<!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////  -->
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">

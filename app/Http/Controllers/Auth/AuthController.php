@@ -50,8 +50,11 @@ class AuthController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|max:255',
+            'Phone' => 'required|regex:/[0-9]{3}-[0-9]{3}[0-9]{2}[0-9]{2}/',
+            'Date' => 'required|regex:/[0-9]{4}-[0-9]{2}-[0-9]{2}/',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
+            'CaptchaCode' => 'required|valid_captcha'
         ]);
     }
 
@@ -69,4 +72,22 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
+    public function index()
+    {
+        return view('Register');
+    }
+
+    public function indexPost(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|same:password_confirmation',
+            'password_confirmation' => 'required',
+            'CaptchaCode' => 'required|valid_captcha'
+        ]);
+        print('write your other code here.');
+    }
+
 }

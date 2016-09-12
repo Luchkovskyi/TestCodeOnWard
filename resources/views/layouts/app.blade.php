@@ -21,6 +21,7 @@
 <body id="app-layout">
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
+            <div class="row">
             <div class="navbar-header">
 
                 <!-- Collapsed Hamburger -->
@@ -32,17 +33,14 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    Laravel
-                </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">Main</a></li>
-                    <li><a href="{{ url('/home') }}">Contacts</a></li>
-                   
+                    <li><a href="{{ url('/') }}">Main</a></li>
+                    <li><a href="{{ url('/') }}">Contacts</a></li>
+
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -65,6 +63,7 @@
                 </ul>
             </div>
         </div>
+      </div>
     </nav>
 
     @yield('content')
