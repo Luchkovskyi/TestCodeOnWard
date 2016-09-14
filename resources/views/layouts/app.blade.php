@@ -46,7 +46,7 @@
 
                     @else
                         <li><a class="lmenuhref" href="{{ url('/') }}">Main</a></li>
-                        <li><a class="lmenuhref" href="{{ url('/') }}">Contacts</a></li>
+                        <li><a class="lmenuhref" href="{{ url('/info') }}">Contacts</a></li>
                         <li><a class="lmenuhref" href="{{ url('/home') }}">Personal Acount</a></li>
                     @endif
 

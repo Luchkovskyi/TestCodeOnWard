@@ -60,7 +60,6 @@ class HomeController extends Controller
             'CaptchaCode' => 'required|valid_captcha'
         ]);
 
-
         $user=User::find($id);
 
         if($request->hasFile('preview'))
@@ -75,13 +74,18 @@ class HomeController extends Controller
             $all['password']= bcrypt($request['password']);
             $all['preview']="/images/".$f_name;
             $user->update($all); //сохраняем массив в базу
+            return back();
         }
         else
         {
-           $user['preview']="/images/temp.jpg";
-           $user->update($request->all());
+           $all=$request->all();
+
+          $all['password']=bcrypt($request['password']);
+          $all['preview']="/images/temp.jpg";
+           $user->update($all);
+            return back();
         }
-        return back();
+
     }
 
 
