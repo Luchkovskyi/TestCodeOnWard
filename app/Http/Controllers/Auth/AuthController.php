@@ -67,38 +67,34 @@ class AuthController extends Controller
      */
    public function create(array $data )
     {
-        print_r($data);
-        if($data->hasFile('preview')) //Проверяем была ли передана картинка
+
+        if(isset($data['preview']))
         {
-            $request=date('d.m.Y'); //опеределяем текущую дату, она же будет именем каталога для картинок
             $root=$_SERVER['DOCUMENT_ROOT']."/images/"; // это корневая папка для загрузки картинок
-            if(!file_exists($root.$request))
-            {
-                mkdir($root.$request); // если папка с датой не существует, то создаем ее
-            }
-            $f_name=$data->file('preview')->getClientOriginalName();//определяем имя файла
-            $data->file('preview')->move($root.$request,$f_name); //перемещаем файл в папку с оригинальным именем
-            $all=$data->all(); //в переменой $all будет массив, который содержит все введенные данные в форме
-            $all['preview']="/images/".$request."/".$f_name;// меняем значение preview на нашу ссылку, иначе в базу попадет что-то вроде /tmp/sdfWEsf.tmp
-            User::create($all); //сохраняем массив в базу
+            $f_name=$data['preview']->getClientOriginalName();//определяем имя файла
+
+            $data['preview']->move($root,$f_name); //перемещаем файл в папку с оригинальным именем
+
+            $data['preview']="/images/".$f_name; // меняем значение preview на нашу ссылку, иначе в базу попадет что-то вроде /tmp/sdfWEsf.tmp
+          // echo $data['_token'];
+            $data['password']= bcrypt($data['password']);
+            return  User::create($data); //сохраняем массив в базу
+
         }
         else
         {
-            return User::create([
-                'Soname' => $data['Soname'],
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'date' => $data['date'],
-                'phone' => $data['phone'],
-                'password' => bcrypt($data['password']),
-            ]);
+            $data['preview']="/images/temp.jpg";
+            $data['password']= bcrypt($data['password']);
+            return User::create($data);
         }
 
 
     }
 
+
     public function index()
     {
+
         return view('Register');
     }
 

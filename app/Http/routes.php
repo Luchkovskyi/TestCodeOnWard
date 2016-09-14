@@ -11,11 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','CvpageController@indexTitul');
+Route::get('/info','CvpageController@indexInfo');
+
 
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
+Route::post('/update/{id}', 'HomeController@update');
+Route::post('/destroy/{id}', 'HomeController@destroy');
+
+
 

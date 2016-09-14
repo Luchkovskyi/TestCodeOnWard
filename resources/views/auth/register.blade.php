@@ -9,8 +9,6 @@
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}" enctype="multipart/form-data" >
                         {{ csrf_field() }}
-
-
 <!-- ///////////////////////////////////////////////////////  AVATARKA ////////////////////////////////////////////////////////  -->
 
                         <div class="form-group{{ $errors->has('preview') ? ' has-error' : '' }}">
@@ -29,15 +27,15 @@
 
 
 <!--/////////////////////////////////////////////////////////////// Soname  //////////////////////////////// -->
-                        <div class="form-group{{ $errors->has('Soname') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('soname') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Soname</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}">
+                                <input id="name" type="text" class="form-control" name="soname" value="{{ old('soname') }}">
 
-                                @if ($errors->has('Soname'))
+                                @if ($errors->has('soname'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('Soname') }}</strong>
+                                        <strong>{{ $errors->first('soname') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -83,9 +81,9 @@
                             <div class="col-md-6">
                                 <input id="text" type="text" class="form-control" name="date" value="{{ old('date') }}">
 
-                                @if ($errors->has('email'))
+                                @if ($errors->has('date'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('Date') }}</strong>
+                                        <strong>{{ $errors->first('date') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -93,14 +91,15 @@
 
                         <!--/////////////////////////////////////////////////////////////// Phone  ////////////////////////////////-->
 
-                        <div class="form-group{{ $errors->has('Phone') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
                             <label for="Phone" class="col-md-4 control-label">Phone</label>
 
                             <div class="col-md-6">
                                 <input id="Phone" type="text" class="form-control" name="phone" value="{{ old('phone') }}">
-                                @if ($errors->has('Phone'))
+
+                                @if ($errors->has('phone'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('Phone') }}</strong>
+                                        <strong>{{ $errors->first('phone') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -157,9 +156,9 @@
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <input type="hidden" name="_token" value="{{csrf_token()}}" />
-                                <input type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary">
                                     <i class="fa fa-btn fa-user"></i> Register
-                                </input>
+                                </button>
                             </div>
                         </div>
                     </form>

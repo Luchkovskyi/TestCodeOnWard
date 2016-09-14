@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>TestTask</title>
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
@@ -14,11 +14,12 @@
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
-    <link href="css/style.css" rel="stylesheet">
 
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
 
 </head>
 <body id="app-layout">
+<header>
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
             <div class="row">
@@ -37,9 +38,17 @@
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/') }}">Main</a></li>
-                    <li><a href="{{ url('/') }}">Contacts</a></li>
+                <ul class="nav navbar-nav lmenu">
+                    @if (Auth::guest())
+
+                        <li><a class="lmenuhref" href="{{ url('/') }}">Main</a></li>
+                        <li><a class="lmenuhref" href="{{ url('/info') }}">Contacts</a></li>
+
+                    @else
+                        <li><a class="lmenuhref" href="{{ url('/') }}">Main</a></li>
+                        <li><a class="lmenuhref" href="{{ url('/') }}">Contacts</a></li>
+                        <li><a class="lmenuhref" href="{{ url('/home') }}">Personal Acount</a></li>
+                    @endif
 
                 </ul>
 
@@ -47,12 +56,13 @@
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}">Login</a></li>
-                        <li><a href="{{ url('/register') }}">Register</a></li>
+                        <li><a class="lmenuhref" href="{{ url('/login') }}">Login</a></li>
+                        <li><a class="lmenuhref" href="{{ url('/register') }}">Register</a></li>
                     @else
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" id="toggle1" aria-expanded="false">
+                               <div id="img"><img id="avatarka" src="{{ Auth::user()->preview }}" /></div>
+                                {{ Auth::user()->name }}&nbsp;{{ Auth::user()->soname[0]."." }}  <div class="caret"></div>
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
@@ -65,7 +75,7 @@
         </div>
       </div>
     </nav>
-
+</header>
     @yield('content')
 
     <!-- JavaScripts -->

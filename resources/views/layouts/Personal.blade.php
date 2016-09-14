@@ -32,17 +32,15 @@
             </button>
 
             <!-- Branding Image -->
-            <a class="navbar-brand" href="{{ url('/') }}">
-                Laravel
-            </a>
+
         </div>
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
-                <li><a href="{{ url('/home') }}">Main</a></li>
-                <li><a href="{{ url('/home') }}">Contacts</a></li>
-                <li><a href="{{ url('/home') }}">Personal Acount</a></li>
+                <li><a class="lmenuhref" href="{{ url('/home') }}">Main</a></li>
+                <li><a class="lmenuhref" href="{{ url('/home') }}">Contacts</a></li>
+                <li><a class="lmenuhref" href="{{ url('/home') }}">Personal Acount</a></li>
 
             </ul>
 
@@ -55,7 +53,7 @@
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            {{ Auth::user()->name }} <span class="caret"></span>
+                            <img id="avatarka" src="{{ Auth::user()->preview }}" />  {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
 
                         <ul class="dropdown-menu" role="menu">

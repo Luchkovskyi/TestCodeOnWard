@@ -9,3 +9,64 @@ body {
 #CaptchaCode{
     margin-left: 15px;
 }
+
+#avatarka{
+    width: 40px;
+    height: 40px;
+    margin-top: -7px;
+
+}
+
+#img{
+    width: 40px;
+    float: left;
+
+}
+
+.nav>li>a {
+
+    padding: 1px 1px 0px 0px;
+}
+
+.lmenu{
+    padding: 0px 10px;
+}
+
+.lmenuhref{
+    margin-left: 30px;
+    margin-top: 15px;
+}
+.navbar-right{
+    padding: 1px 1px;
+    margin-top: 1px;
+}
+
+#form-horizontal{
+ float: right;
+}
+
+#btnpic{
+    width: 250px;
+}
+#bt{
+    height: 20px;
+    width: 250px;
+}
+#delbt{
+    float: right;
+}
+.caret{
+    margin: 10px 10px;
+}
+#toggle1{
+    margin-top: 8px;
+}
+#imgtitul{
+    width: 120px;
+    height: 120px;
+    float: left;
+}
+#cv{
+    width: 70%;
+    float: right;
+}
